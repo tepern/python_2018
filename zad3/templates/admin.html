@@ -1,0 +1,34 @@
+{% extends 'pizza_base.html' %}
+
+{% block h1 %}
+Заказы
+{% endblock %}
+
+{% block content %}
+	
+	{% for order in orders %}
+	<form method="post">
+		<div class='form-group'>
+			<p>
+				Дата:&nbsp;&nbsp;{{ order.created.day }}/{{ order.created.month }}/{{ order.created.year }} &nbsp; {{ order.created.hour }}:{{ order.created.minute }}<input type="text" class="invisible" name="order_number" value="{{ loop.index }}" placeholder="{{ loop.index }}">
+			</p>
+			<p>Пицца:&nbsp;&nbsp;{{ order.title }}</p>
+			<p>Клиент:&nbsp;&nbsp;{{ order.client }} </p>
+			<p>Телефон:&nbsp;&nbsp;{{ order.phone }} </p>
+			<p>Адрес:&nbsp;&nbsp;{{ order.address }}</p>
+			<p>Статус:&nbsp;&nbsp;{{ order.status }}</p>
+		</div>
+		<p>
+			<select class="input-medium" name="status" value="{{ order.status }}">
+				<option {% if order.status == "Новый" %} selected {% endif %}>Новый</option>
+				<option {% if order.status == "Отправлен на кухню" %} selected {% endif %}>Отправлен на кухню</option>
+				<option {% if order.status == "Отправлен в доставку" %} selected {% endif %}>Отправлен в доставку</option>
+				<option {% if order.status == "Доставлен" %} selected {% endif %}>Доставлен</option>
+			</select>&nbsp;&nbsp;
+			<button type="submit" class="btn">Сохранить</button>
+	     </p>
+	</form>
+    <hr>
+    {% endfor %}
+    
+{% endblock %}
