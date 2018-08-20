@@ -1,0 +1,26 @@
+{% extends 'pizza_base.html' %}
+
+{% block h1 %}
+Пицца
+{% endblock %}
+
+{% block content %}
+  {% for item in pizza %}
+    <div class='blog-post'>
+		<h3>{{ item.title }}</h3>
+		
+		<p>
+			<span class="text-muted">
+				Цена: {{ item.price }} &nbsp;&nbsp; 
+			</span>
+			<a class="btn" href="/add_order">Заказать</a>
+		</p>
+		<p>	
+			<span class="text-muted">
+				Состав: {{ item.ingredients }}
+			</span>
+		</p>
+    </div>
+    <hr>
+  {% endfor %}
+{% endblock %}
